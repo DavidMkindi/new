@@ -1,0 +1,74 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  workflow_dispatch:  # Allows manual triggering via GitHub UI or CLI
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build web assets
+      run: |
+        # If you have a build script, uncomment and use it:
+        # npm run build
+        # Otherwise, ensure your dist folder is built or committed
+        echo "Make sure your web assets are built in the dist folder"
+        
+    - name: Sync Capacitor
+      run: npx cap sync android
+      
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+        
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+      
+    - name: Grant execute permission for gradlew
+      run: chmod +x android/gradlew
+      
+    - name: Build Debug APK
+      working-directory: android
+      run: ./gradlew assembleDebug --no-daemon --stacktrace
+      env:
+        ANDROID_HOME: ${{ env.ANDROID_HOME }}
+        ANDROID_SDK_ROOT: ${{ env.ANDROID_SDK_ROOT }}
+        GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.parallel=true"
+      
+    - name: Find and list APK files
+      run: |
+        echo "Searching for APK files..."
+        find android/app/build/outputs -name "*.apk" -type f || true
+        echo "Listing APK directory structure:"
+        ls -la android/app/build/outputs/apk/ || true
+        ls -la android/app/build/outputs/apk/debug/ || true
+        ls -la android/app/build/outputs/apk/release/ || true
+        echo "Expected APK name: noble & glow manager-debug.apk or noble & glow manager-release.apk"
+      
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: noble & glow manager-apk
+        path: android/app/build/outputs/apk/**/*.apk
+        retention-days: 30
+        if-no-files-found: error
+
