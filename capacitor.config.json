@@ -1,0 +1,33 @@
+{
+  "appId": "com.noble & glow manager.app",
+  "appName": "noble & glow manager",
+  "webDir": "dist",
+  "server": {
+    "url": "https://noble-glow-manager-198930c5.base44.app/Dashboard",
+    "cleartext": false
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "backgroundColor": "#ffffff"
+    },
+    "PushNotifications": {
+      "presentationOptions": [
+        "badge",
+        "sound",
+        "alert"
+      ]
+    },
+    "Camera": {
+      "cameraDirection": "BACK"
+    }
+  },
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true
+  },
+  "ios": {
+    "allowsLinkPreview": true,
+    "scrollEnabled": true
+  }
+}
