@@ -1,4 +1,4 @@
-package com.noble & glow manager.app;
+package com.hallor.app;
 
 import android.os.Bundle;
 import android.content.res.Configuration;

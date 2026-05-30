@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "com.noble & glow manager.app"
+    namespace "com.hallor.app"
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.noble & glow manager.app"
+        applicationId "com.hallor.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -28,7 +28,7 @@ android {
     
     applicationVariants.all { variant ->
         variant.outputs.all {
-            def appName = "noble & glow manager"
+            def appName = "noble-glow-manager"
             outputFileName = "${appName}-${variant.buildType.name}.apk"
         }
     }
