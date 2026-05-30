@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">noble & glow manager</string>
     <string name="title_activity_main">noble & glow manager</string>
-    <string name="package_name">com.noble & glow manager.app</string>
-    <string name="custom_url_scheme">com.noble & glow manager.app</string>
+    <string name="package_name">com.hallor.app</string>
+    <string name="custom_url_scheme">com.hallor.app</string>
 </resources>

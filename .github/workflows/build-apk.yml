@@ -62,12 +62,12 @@ jobs:
         ls -la android/app/build/outputs/apk/ || true
         ls -la android/app/build/outputs/apk/debug/ || true
         ls -la android/app/build/outputs/apk/release/ || true
-        echo "Expected APK name: noble & glow manager-debug.apk or noble & glow manager-release.apk"
+        echo "Expected APK name: noble-glow-manager-debug.apk or noble-glow-manager-release.apk"
       
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: noble & glow manager-apk
+        name: noble-glow-manager-apk
         path: android/app/build/outputs/apk/**/*.apk
         retention-days: 30
         if-no-files-found: error
